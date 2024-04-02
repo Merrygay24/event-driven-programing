@@ -3,7 +3,7 @@
 
     $value = $_POST ['search']; 
 
-    $sql = "SELECT * FROM guest Where (Fname LIKE '%$value%' OR Guest_ID  LIKE '%$value%')";
+    $sql = "SELECT * FROM register Where (FName LIKE '%$value%' OR ID  LIKE '%$value%')";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -11,8 +11,8 @@
         while ($row = $result->fetch_assoc()) {
            ?>
            <tr>
-            <td style="text-align : center;"><?= $row['Guest_ID'] ?></td>
-            <td><?= $row['Fname'] ?></td>
+            <td style="text-align : center;"><?= $row['ID'] ?></td>
+            <td><?= $row['FName'] ?></td>
            </tr>
            <?php
         }
