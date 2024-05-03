@@ -52,17 +52,17 @@
 
         <div class="container">
             <br>
-            <p>You can add record for student here.</p>
+            <p>You can add Postal Code here.</p>
             <div class="card mt-3">
 
-                <form action="save.php" method="POST">
-                    <div class="card-header h3">Registration Form</div>
+                <form action="SavePosCod.php" method="POST">
+                    <div class="card-header h3">Postal Code Registration</div>
                     <div class="card-body">
                         <?php
                         if (isset($_GET['success'])) {
                             ?>
                             <div class="alert alert-success">
-                                <b>New Student Added:</b> Congratulations! New STUDENT added.
+                                <b>Postal Code Added:</b> Congratulations! New STUDENT added.
                             </div>
                             <?php
                         } elseif (isset($_GET['invalid'])) {
@@ -73,77 +73,12 @@
                             <?php
                         }
                         ?>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label> Student ID : <b class="text-danger">*</b></label>
-                                <input name="inp_sid" required type="text" placeholder="Enter student ID here.."
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-4">
-                                <label> Application ID : <b class="text-danger">*</b></label>
-                                <input name="inp_appid" required type="text" placeholder="Enter Application ID here.."
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-5">
-                                <label> TES Award Number : <b class="text-danger">*</b></label>
-                                <input name="inp_tesno" required type="text" placeholder="Enter TES Award Number here.."
-                                    class="form-control mt-1">
-                            </div>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-3">
-                                <label>First Name : <b class="text-danger">*</b></label>
-                                <input name="inp_fname" required type="text" placeholder="Enter first name here.."
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-4">
-                                <label>Last Name : <b class="text-danger">*</b></label>
-                                <input name="inp_lname" required type="text" placeholder="Enter last name here.."
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-2">
-                                <label>Ext. Name : <small>(Optional)</small></label>
-                                <input name="inp_ename" type="text" placeholder="Ext. name here.."
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-3">
-                                <label>Middle Name : <small>(Optional)</small></label>
-                                <input name="inp_mname" type="text" placeholder="Enter middle name here.."
-                                    class="form-control mt-1">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-3">
-                                <label>Gender : <b class="text-danger">*</b></label>
-                                <select name="inp_gender" required class="form-control mt-2">
-                                    <option value="" disabled selected>-- SELECT GENDER --</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Male">Male</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label>Contact Number : <b class="text-danger">*</b></label>
-                                <input name="inp_contact" required type="text" placeholder="09 XXXX XXXX"
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-2">
-                                <label>Award Batch : <b class="text-danger">*</b></label>
-                                <input name="inp_batch" required type="text" placeholder="Batch X"
-                                    class="form-control mt-1">
-                            </div>
-                            <div class="col-md-3">
-                                <label>Status : <small>(Optional)</small></label>
-                                <input name="inp_status" type="text" placeholder="Enter the student status here.."
-                                    class="form-control mt-1">
-                            </div>
-                        </div>
-
+                        
                         <?php
                         include './config/database.php';
                         ?>
                         <div class="col-md-12">
-                            <hr>
+
                         </div>
                         <div class="col-md-12">
                             <label>Region : <b class="text-danger">*</b></label>
@@ -178,26 +113,22 @@
                         </div>
                         <div class="col-md-12">
                             <label>City / Municipality : <b class="text-danger">*</b></label>
-                            <select name="inp_citymun" id="inp_citymun" onchange="display_brgy(this.value)" required
+                            <select name="inp_citymun" id="inp_citymun"
                                 class="form-control mt-2">
                                 <option value="" disabled selected>-- SELECT CITY / MUNICIPALITY --</option>
                             </select>
-                        </div>
                         <div class="col-md-12">
-                            <label>Barangay : <b class="text-danger">*</b></label>
-                            <select name="inp_brgy" id="inp_brgy" required class="form-control mt-2">
-                                <option value="" disabled selected>-- SELECT BARANGAY --</option>
-                            </select>
                         </div>
-                        <div class="col-md-12">
-                            <hr>
-                        </div>
+                             <div class="col-md-12">
+                                <label>POSTAL CODE : <b class="text-danger">*</b></label>
+                              <input type="text" name="PostalCode" id="PostalCode" required class="form-control mt-2" placeholder="Enter Postal Code">
+                            </div>
                         <div class="card-footer">
                             <div class="row mt-12">
                                 <div>
                                     <span style="float: right">
                                         <button class="btn btn-success">
-                                            Add New Student
+                                            Add Postal CODE
                                         </button>
                                     </span>
                                 </div>
@@ -214,7 +145,7 @@
         </div>
     </footer>
 </body>
-
+                                
 <script>
     function display_province(regCode) {
         $.ajax({
@@ -245,22 +176,6 @@
         });
 
     }
-
-    function display_brgy(citymunCode) {
-        $.ajax({
-            url: './models/ph_address.php',
-            type: 'POST',
-            data: {
-                'type': 'citymun',
-                'post_code': citymunCode
-            },
-            success: function (response) {
-                $('#inp_brgy').html(response);
-            }
-        });
-
-    }
-
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
